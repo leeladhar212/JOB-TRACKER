@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "text": "Which of the following is used to manage global state in a complex React application?",
+    "options": ["React DOM", "Redux", "Axios", "Webpack"],
+    "correctAnswer": "Redux",
+    "skill": "React State Management"
+  },
+  {
+    "id": 2,
+    "text": "In JavaScript, what mechanism allows functions to remember the scope in which they were created?",
+    "options": ["Hoisting", "Promises", "Closures", "Call Stack"],
+    "correctAnswer": "Closures",
+    "skill": "JavaScript Core Concepts"
+  },
+  {
+    "id": 3,
+    "text": "Which clause in SQL is used to filter records after an aggregation has occurred?",
+    "options": ["WHERE", "ORDER BY", "HAVING", "GROUP BY"],
+    "correctAnswer": "HAVING",
+    "skill": "Advanced SQL"
+  },
+  {
+    "id": 4,
+    "text": "What does a Dockerfile essentially do?",
+    "options": ["Connects to a remote database", "Defines the steps to build a Docker Image", "Manages Kubernetes pods", "Orchestrates microservices"],
+    "correctAnswer": "Defines the steps to build a Docker Image",
+    "skill": "Docker/DevOps Basics"
+  },
+  {
+    "id": 5,
+    "text": "In Python, which built-in data structure is unordered and strictly guarantees unique elements?",
+    "options": ["List", "Dictionary", "Tuple", "Set"],
+    "correctAnswer": "Set",
+    "skill": "Python Data Structures"
+  },
+  {
+    "id": 6,
+    "text": "What is the primary architectural purpose of a RESTful API?",
+    "options": ["To render interactive UI", "To provide stateless client-server communication using standard HTTP methods", "To cache database queries locally", "To securely hash passwords"],
+    "correctAnswer": "To provide stateless client-server communication using standard HTTP methods",
+    "skill": "REST Architecture"
+  }
+]
