@@ -30,21 +30,31 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Start In-Memory MongoDB Server instead of local!
+// Database Connection Logic
 const startServer = async () => {
     try {
-        console.log('Spinning up In-Memory MongoDB server...');
-        const mongoServer = await MongoMemoryServer.create();
-        const mongoUri = mongoServer.getUri();
-        
-        await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-        console.log(`In-Memory MongoDB Connected at ${mongoUri}`);
+        let mongoUri = process.env.MONGO_URI;
 
-        // Seed data automatically on startup
-        const { seedData } = require('./utils/seeder');
-        await seedData();
+        // Use In-Memory MongoDB only in local development if no URI is provided
+        if (process.env.NODE_ENV !== 'production' && !mongoUri) {
+            console.log('Spinning up In-Memory MongoDB server for development...');
+            const mongoServer = await MongoMemoryServer.create();
+            mongoUri = mongoServer.getUri();
+            
+            // Seed data automatically in dev mode
+            await mongoose.connect(mongoUri);
+            console.log(`In-Memory MongoDB Connected at ${mongoUri}`);
+            
+            const { seedData } = require('./utils/seeder');
+            await seedData();
+        } else {
+            // Connect to Cloud Database (Atlas) in production
+            if (!mongoUri) throw new Error('MONGO_URI is missing in production environment');
+            await mongoose.connect(mongoUri);
+            console.log('MongoDB Atlas Connected Successfully');
+        }
 
-        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+        app.listen(PORT, () => console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`));
     } catch (err) {
         console.error('Database connection failed', err);
         process.exit(1);
